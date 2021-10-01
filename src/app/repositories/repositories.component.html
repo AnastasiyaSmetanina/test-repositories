@@ -1,0 +1,30 @@
+<div fxLayout="column"
+     fxLayoutAlign="center center">
+  <div class="find-area-width mt-4">
+    <mat-form-field class="w-75">
+      <mat-label>Repository name</mat-label>
+      <input matInput
+             type="text"
+             [(ngModel)]="name">
+    </mat-form-field>
+    <button mat-stroked-button
+            class="w-25"
+            (click)="changeName()">
+      Find
+    </button>
+  </div>
+  <ng-container *ngIf="repositories?.items.length > 0; else noRepositories">
+    <app-repository-card *ngFor="let repo of repositories.items"
+                         [repository]="repo"
+                         class="mb-2"
+    ></app-repository-card>
+
+    <mat-paginator [length]="repositories.total_count"
+                   [pageIndex]="pageIndex"
+                   pageSize="10"
+                   (page)="changePage($event)"
+                   aria-label="Select page">
+    </mat-paginator>
+  </ng-container>
+  <ng-template #noRepositories>No repositories</ng-template>
+</div>

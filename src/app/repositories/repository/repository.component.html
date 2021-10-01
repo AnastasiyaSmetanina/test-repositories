@@ -1,0 +1,41 @@
+<div fxLayoutAlign="center center">
+  <mat-card *ngIf="repository$ | async as repository"
+            fxFlex.gt-md="50%"
+            class="mt-4">
+    <div fxLayoutAlign="space-between start">
+      <div fxFlex="75%">
+        <h2 class="mt-0">{{repository.name}}</h2>
+        <p class="m-0"
+           fxLayoutAlign="none center">
+          <mat-icon>star</mat-icon>
+          {{repository.stargazers_count}}
+        </p>
+        <p>Last update: {{repository.updated_at | date}}</p>
+        <p>{{repository.description}}</p>
+        <app-languages [fullName]="repository.full_name"></app-languages>
+      </div>
+
+      <div fxFlex="25%"
+           fxLayout="column"
+           fxLayoutAlign="center center">
+        <img *ngIf="repository.owner.avatar_url; else defaultAvatar"
+             [src]="repository.owner.avatar_url"
+             class="avatar">
+        <ng-template #defaultAvatar>
+          <div class="defaultAvatar">
+            <mat-icon [inline]="true">person</mat-icon>
+          </div>
+        </ng-template>
+        <a mat-flat-button [href]="repository.owner.html_url">{{repository.owner.login}}</a>
+      </div>
+    </div>
+
+    <app-contributors [fullName]="repository.full_name"></app-contributors>
+
+    <button mat-stroked-button
+            class="mt-4"
+            (click)="location.back()">
+      Back
+    </button>
+  </mat-card>
+</div>

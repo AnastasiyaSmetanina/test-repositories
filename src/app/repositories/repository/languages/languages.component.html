@@ -1,0 +1,6 @@
+<h3>Languages</h3>
+<mat-list *ngIf="languages$ | async as languages">
+  <mat-list-item *ngFor="let key of languages | keys">
+    {{key}}: {{languages[key]}}
+  </mat-list-item>
+</mat-list>

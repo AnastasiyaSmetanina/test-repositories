@@ -1,0 +1,12 @@
+<mat-card (click)="toRepository()">
+  <div fxLayout="row"
+       fxLayoutAlign="space-between center">
+    <h2 class="m-0">{{repository.name}}</h2>
+    <p class="m-0" fxLayoutAlign="none center">
+      <mat-icon>star</mat-icon>
+      {{repository.stargazers_count}}
+    </p>
+  </div>
+  <p>Last update: {{repository.updated_at | date}}</p>
+  <button mat-stroked-button (click)="toGithub()">Github</button>
+</mat-card>
